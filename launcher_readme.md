@@ -39,7 +39,7 @@
  * 注意点
    * 设置字体选项：需要平板/hpdata/fonts/下有字体文件，没有的话就不显示
    * 设置里采用otto事件总线进行通信  Store.bus.post(msg)发送消息，在 onMsgChange(Message msg)里面接收消息，（不是handle）
-   * 拖动排序是自己实现的，没有用第三方框架[参考这篇文章](http://www.2cto.com/kf/201609/548687.html)，Collections.swap(mDatas, from, target);        交换
+   * 拖动排序是自己实现的（[参考这篇文章](http://www.2cto.com/kf/201609/548687.html)），没有用第三方框架，Collections.swap(mDatas, from, target);        交换
    * 设置信息全部封装在SettingBean中，
  
  ### 上网管理服务 
