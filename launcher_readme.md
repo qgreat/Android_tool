@@ -45,9 +45,14 @@
  ### 上网管理服务 
    * 主要工作改bug，幼教家教机都使用 h30项目下的nethandle
    * ApkFilterService findAddr（）方法判断屏蔽的第三方软件安装助手
-   * HistoryDb line361 开放网站（例：带cloud的网站）
+   * HistoryDb line361 开放网址（例：带cloud的网站）
    * HistoryDb getSPMode()里面通过判断Build.MODEL区分机型，兼容家教机和kimi平板
-
+   
+ ### 语音助手
+ * 去讯飞语音官网注册账号，开通需要的功能，拿到IFLYTEK_APPKEY，在manifest注册，拷入jar包（参照官方文档、demo），.so文件。
+ * 在VoiceHelperActivity里初始化IflytekUnderstander（里面封装mTextUnderstander、SpeechUnderstander）、IflytekSynthesizer（SpeechSynthesizer），通过发送广播通知外部状态改变，RecognizerReceiver接收识别消息，SynthesizerReceiver接收合成消息，
+ * 初始化动画animatorView（frame动画，可能造成oom），动画之后设置onTouch事件，在down事件里接收语音识别、结束speak、开始动画、调用understander.understanderVoice();在up方法里判断时间是否足够，否则接收识别，结束动画，通过位置判读是否取消识别，如果正常，结束识别（开始识别）
+ * 之后会调用doRecognizerResult（）方法，将返回的json数据封装进FilterResult里面，如果getRc()结果返回0，调用doFilter()处理结果，如果不是0，则拿到文本自己处理。  
    
    
    
